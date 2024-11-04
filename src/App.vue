@@ -11,22 +11,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import HelloWorld from './components/PageHome.vue'
 import PageHead from './components/PageHead.vue'
 
-
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-    PageHead
-  }
-}
 </script>
 
-<style>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
