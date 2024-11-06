@@ -4,29 +4,26 @@
       class="el-menu-demo"
       mode="horizontal"
       :ellipsis="false"
-      background-color="#36d9f5"
+
 
   >
     <el-menu-item index="0">
       <img
           style="width: 50px; height: 50px"
-          src="../assets/head_logo.jpg"
+          src="../assets/head_logo.png"
           alt="Element logo"
       />
     </el-menu-item>
-    <el-menu-item index="1">Processing Center</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
+    <el-link type="info" :to="{name:'home'}">
+      <el-menu-item index="1">主页</el-menu-item>
+    </el-link>
+
+    <el-link type="info" href="https://www.qiniu.com/">
+      <el-menu-item index="2">关于我们</el-menu-item>
+    </el-link>
+
+
+
   </el-menu>
 
 </template>
