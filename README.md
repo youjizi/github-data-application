@@ -2,7 +2,7 @@
 
 GitHub数据应用前端
 架构文档等信息请前往后台仓库
-后台仓库导航：[https://github.com/youjizi/github-data-application](https://github.com/3395444278/qiniu)
+后台仓库导航：https://github.com/3395444278/qiniu
 
 
 
