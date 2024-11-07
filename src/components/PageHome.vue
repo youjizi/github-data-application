@@ -1,5 +1,3 @@
-
-
 <template id="PageHome">
 
 <div class="container">
@@ -109,7 +107,9 @@
       </el-descriptions-item>
       <el-descriptions-item label="技术"  >
         <el-row class="w-150px mb-2"  style="width: 600px; ">
-          <el-text class="custom-truncate"  style="color: #999999" truncated>{{ item.skills.toString() || "暂无" }}</el-text>
+          <el-text class="custom-truncate"  style="color: #999999" truncated>
+            {{ item.skills?.toString() || "暂无" }}
+          </el-text>
         </el-row>
       </el-descriptions-item>
 
@@ -283,6 +283,11 @@ function buildQueryParams(params) {
 const  querySearchAsync = async (requestParams) => {
   try {
     const res = await getSearch(requestParams);
+    // 确保每个开发者的 skills 字段都有值
+    res.developers = res.developers.map(dev => ({
+      ...dev,
+      skills: dev.skills || []
+    }));
     developersData.value = res.valueOf();
     developersData.value.content_show = true
   } catch (e) {
