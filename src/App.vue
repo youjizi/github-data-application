@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import HelloWorld from './components/PageHome.vue'
 import PageHead from './components/PageHead.vue'
 
 </script>
