@@ -1,5 +1,9 @@
 # github-data
 
+Node version  18.19.0
+npm  version  10.2.3
+
+
 ## Project setup
 ```
 npm install
