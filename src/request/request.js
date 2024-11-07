@@ -28,3 +28,14 @@ export function getDevelopersInfo(id){
     });
 
 }
+
+export function getNations(){
+
+    let url = `/api/nations`;
+
+    return httpInstance({
+        url: url,
+        method: 'GET'
+    });
+
+}

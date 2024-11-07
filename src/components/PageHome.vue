@@ -38,9 +38,34 @@
 
   </div>
 
-  <div>
-    <!--    <el-checkbox v-model="item.value"   v-for="item in domain"   :label="item.key" size="large" border />-->
-  </div>
+
+  <el-collapse>
+    <el-collapse-item title="Nations" >
+      <div>
+        <el-checkbox-group v-model="selectedNations"   >
+          <el-checkbox
+              v-for="item in nations"
+              :key="item.nation"
+              :label="item.nation"
+          >
+            {{ item.nation }}
+          </el-checkbox>
+        </el-checkbox-group>
+      </div>
+
+
+      <template #title  style="width: 100%"  >
+        Nations
+      </template>
+      <template #icon >
+      <el-icon><Location /></el-icon>
+
+      </template>
+
+    </el-collapse-item>
+  </el-collapse>
+
+
 
 
   <!--内容组件-->
@@ -124,11 +149,12 @@
 
 
 <script setup>
-import {getSearch} from "@/request/request";
+import {getSearch, getNations} from "@/request/request";
 import {onMounted, ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 
+// 路由
 const router = useRouter()
 
 const goToUserInfo = (userId) => {
@@ -152,13 +178,16 @@ const developersData = ref(
 const domain_val = ref("")
 // 搜索参数
 const input_val = ref("")
-
+// 地区搜索参数
+const nations = ref([])
+const selectedNations = ref([]);
 
 const handleSelect = (item) => {
   console.log("选择：", item)
   developersData.value.page = 1
   querySearchLimit(1)
 }
+
 
 
 
@@ -193,7 +222,9 @@ function querySearchLimit(newPage){
 
   // 1.分页处理
   params.page = newPage
-
+  params.nations = selectedNations.value
+  console.log("分页参数：", params)
+  selectedNations
 
   // 领域处理
   if (domain_val.value !== ""  && domain_val.value !== domain[0].value) {
@@ -214,10 +245,17 @@ function querySearchLimit(newPage){
     requestParams += "&keyword=" + input_val.value
   }
 
+  onMounted(() => {
+    window.addEventListener('keydown', handleKeydown);
+  });
 
   querySearchAsync(requestParams);
   scrollToTop();
-
+  const handleKeydown = (event) => {
+    if (event.key === 'Enter') {
+      querySearchLimit(developersData.value.page)
+    }
+  };
 
 }
 
@@ -262,8 +300,13 @@ const scrollToTop = () => {
 querySearchLimit(1)
 domain_val.value = domain[0].value
 
-</script>
 
+getNations().then(res => {
+  nations.value = res.data
+})
+
+</script>
+.
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -283,6 +326,10 @@ domain_val.value = domain[0].value
   width: 625px;
 
 
+}
+
+/deep/ .el-collapse-item__header{
+  color: #999999;
 }
 
 
