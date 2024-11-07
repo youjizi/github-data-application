@@ -5,7 +5,8 @@
         <page-head class="page-head"></page-head>
       </el-header>
       <el-main>
-        <HelloWorld></HelloWorld>
+    <router-view>
+    </router-view>
       </el-main>
     </el-container>
   </div>

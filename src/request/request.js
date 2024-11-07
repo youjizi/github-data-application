@@ -17,3 +17,14 @@ export function getSearch(params){
     });
 
 }
+
+export function getDevelopersInfo(id){
+
+    let url = `/api/developers/${id}`;
+
+    return httpInstance({
+        url: url,
+        method: 'GET'
+    });
+
+}

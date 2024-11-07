@@ -12,7 +12,7 @@
           v-model="input_val"
 
           @input = "handleSelect"
-          placeholder="Please input"
+          placeholder="搜索"
           class="input-with-select"
           clearable
           :suffix-icon="Search"
@@ -63,9 +63,17 @@
             :src="item.avatar"
         />
       </el-descriptions-item>
-      <el-descriptions-item label="开发者"  :width="120">{{item.name}}</el-descriptions-item>
+
+
+        <el-descriptions-item label="开发者"  :width="120"   >
+
+          <el-button type="text" @click="goToUserInfo(item.id)">  {{item.name}}</el-button>
+        </el-descriptions-item>
+
+
+
       <el-descriptions-item label="国家"  :width="120" >
-        <el-tag size="small" >{{item.nation }}</el-tag>
+        <el-tag size="small" >{{item.nation || "隐藏"}}</el-tag>
       </el-descriptions-item>
       <el-descriptions-item label="starts">{{item.star_count}}</el-descriptions-item>
       <el-descriptions-item label="评估">
@@ -75,18 +83,19 @@
                      striped-flow />
       </el-descriptions-item>
       <el-descriptions-item label="技术"  >
-        <el-row class="w-150px mb-2"  style="width: 600px">
-          <el-text class="custom-truncate" truncated>{{ item.skills.toString() || "暂无" }}</el-text>
+        <el-row class="w-150px mb-2"  style="width: 600px; ">
+          <el-text class="custom-truncate"  style="color: #999999" truncated>{{ item.skills.toString() || "暂无" }}</el-text>
         </el-row>
       </el-descriptions-item>
 
     </el-descriptions>
+
   </div>
 
   <!--  异常组件 -->
   <div v-else  class="content-err">
     <img src="../assets/err.png" >
-    <span>牛牛在吃草，稍后再来吧~"</span>
+    <span>牛牛在吃草，稍后再来吧~</span>
   </div>
 
   <!--分页组件-->
@@ -106,6 +115,8 @@
 
 </div>
 
+
+
 </template>
 
 
@@ -116,6 +127,16 @@
 import {getSearch} from "@/request/request";
 import {onMounted, ref} from "vue";
 import { Search } from '@element-plus/icons-vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToUserInfo = (userId) => {
+  router.push({ name: 'UserInfo', params: { id: userId } });
+};
+
+
+
 // 渲染数据
 const developersData = ref(
     {
@@ -166,8 +187,6 @@ const domain = [
   {label: "嵌入式", value: "embedded"},
   {label: "系统开发", value: "systems"}
 ]
-
-
 
 // 分页查询
 function querySearchLimit(newPage){

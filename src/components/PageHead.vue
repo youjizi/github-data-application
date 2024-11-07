@@ -8,14 +8,27 @@
 
   >
     <el-menu-item index="0">
-      <img
-          style="width: 50px; height: 50px"
-          src="../assets/head_logo.png"
-          alt="Element logo"
-      />
+
+      <router-link  :to="{ name: 'home' } " >
+        <img
+            style="width: 50px; height: 50px"
+            src="../assets/head_logo.png"
+            alt="Element logo"
+        />
+      </router-link>
+
     </el-menu-item>
-    <el-link type="info" :to="{name:'home'}">
-      <el-menu-item index="1">主页</el-menu-item>
+
+
+
+
+
+
+
+    <el-link type="info" >
+      <router-link  :to="{ name: 'home' } "  style="text-decoration: none;">
+        <el-menu-item index="1">主页</el-menu-item>
+      </router-link>
     </el-link>
 
     <el-link type="info" href="https://www.qiniu.com/">
@@ -42,6 +55,10 @@ export default {
 
 .el-menu--horizontal > .el-menu-item:nth-child(1) {
   margin-right: auto;
+
+}
+
+.el-menu-item > .router-link {
 
 }
 </style>
